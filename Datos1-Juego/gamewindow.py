@@ -9,10 +9,12 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import pandas as pd
 
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+
+class Ui_MainWindow1(object):
+    def setup(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1128, 867)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -36,15 +38,19 @@ class Ui_MainWindow(object):
         self.boton1 = QtWidgets.QPushButton(self.groupBox)
         self.boton1.setGeometry(QtCore.QRect(30, 140, 421, 101))
         self.boton1.setObjectName("boton1")
+        self.boton1.clicked.connect(self.A_clicked)
         self.boton3 = QtWidgets.QPushButton(self.groupBox)
         self.boton3.setGeometry(QtCore.QRect(630, 140, 421, 101))
         self.boton3.setObjectName("boton3")
+        self.boton3.clicked.connect(self.C_clicked)
         self.boton2 = QtWidgets.QPushButton(self.groupBox)
         self.boton2.setGeometry(QtCore.QRect(30, 250, 421, 101))
         self.boton2.setObjectName("boton2")
+        self.boton2.clicked.connect(self.B_clicked)
         self.boton4 = QtWidgets.QPushButton(self.groupBox)
         self.boton4.setGeometry(QtCore.QRect(630, 250, 421, 101))
         self.boton4.setObjectName("boton4")
+        self.boton4.clicked.connect(self.D_clicked)
         self.frame = QtWidgets.QFrame(self.groupBox)
         self.frame.setGeometry(QtCore.QRect(10, 0, 1091, 141))
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
@@ -155,19 +161,67 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.groupBox.setTitle(_translate("MainWindow", "GroupBox"))
-        self.boton1.setText(_translate("MainWindow", "PushButton"))
-        self.boton3.setText(_translate("MainWindow", "PushButton"))
-        self.boton2.setText(_translate("MainWindow", "PushButton"))
-        self.boton4.setText(_translate("MainWindow", "PushButton"))
+        self.boton1.setText(_translate("MainWindow", "A"))
+        self.boton2.setText(_translate("MainWindow", "B"))
+        self.boton3.setText(_translate("MainWindow", "C"))
+        self.boton4.setText(_translate("MainWindow", "D"))
         self.labelpregunta.setText(_translate("MainWindow", "Pregunta"))
         self.numliveslabel.setText(_translate("MainWindow", "x3"))
+    
+    def A_clicked(self):
+        answer = "a"
+    def B_clicked(self):
+        answer = "b"
+    def C_clicked(self):
+        answer = "c"
+    def D_clicked(self):
+        answer = "d"
+    
+def play(self):
+    import numpy as np
+    archivopreg = 'QyA.xlsx'
+    preguntas = pd.read_excel(archivopreg)
+    lives = 3
+    livestr = str(lives)
+    score = 0
+    used = []
+    while lives > 0:
+        num = np.random.randint(0,5)
+        while num not in used:
+            preg= preguntas['Pregunta'][num]
+            respa=preguntas['A'][num]
+            respb=preguntas['B'][num]
+            respc=preguntas['C'][num]
+            respd=preguntas['D'][num]
+            respcorrect= preguntas['Correcta'][num]
+            used.append(num)
+            retranslateUi(respa,respb,respc,respd,preg,livestr)
+            if Ui_MainWindow1.answer == respcorrect.lower():
+                score += 100
+            else:
+                lives -= 1
+                livestr = str(lives)
+                retranslateUi(respa,respb,respc,respd,preg,livestr)
+                
+
+def retranslateUi(respa,respb,respc,respd,preg,livestr):
+    _translate = QtCore.QCoreApplication.translate
+    Ui_MainWindow1.boton1.setText(_translate("MainWindow", respa))
+    Ui_MainWindow1.boton2.setText(_translate("MainWindow", respb))
+    Ui_MainWindow1.boton3.setText(_translate("MainWindow", respc))
+    Ui_MainWindow1.boton4.setText(_translate("MainWindow", respd))
+    Ui_MainWindow1.labelpregunta.setText(_translate("MainWindow", preg))
+    Ui_MainWindow1.numliveslabel.setText(_translate("MainWindow", "x"+ livestr))
+  
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Ui_MainWindow1()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
+

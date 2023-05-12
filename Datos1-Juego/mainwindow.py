@@ -9,9 +9,21 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+#from gamewindow import *
+import numpy as np
+from rbgame import *
+import rbgame
 
 
 class Ui_MainWindow(object):
+    
+    def gamestart(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui= Ui_MainWindow1()
+        self.ui.setup(self.window)
+        self.window.show()
+        
+
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1044, 836)
@@ -38,6 +50,7 @@ class Ui_MainWindow(object):
         self.BotonJugar = QtWidgets.QPushButton(self.frame)
         self.BotonJugar.setGeometry(QtCore.QRect(380, 350, 201, 81))
         self.BotonJugar.setObjectName("BotonJugar")
+        self.BotonJugar.clicked.connect(self.gamestart)
         self.BotonPuntuacion = QtWidgets.QPushButton(self.frame)
         self.BotonPuntuacion.setGeometry(QtCore.QRect(380, 480, 201, 71))
         self.BotonPuntuacion.setObjectName("BotonPuntuacion")
@@ -55,6 +68,9 @@ class Ui_MainWindow(object):
         self.BotonJugar.setText(_translate("MainWindow", "Jugar"))
         self.BotonPuntuacion.setText(_translate("MainWindow", "Puntuaciones"))
         self.botonopciones.setText(_translate("MainWindow", "Opciones"))
+    
+    
+   
 
 
 if __name__ == "__main__":
