@@ -272,6 +272,7 @@ class Ui_MainWindow1(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.BotonAceptar.clicked.connect(self.submit_answer)
+        ui.reset_question()
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -314,45 +315,51 @@ class Ui_MainWindow1(object):
             print("d")
             return answer
 
-    def play(self):
-        import numpy as np
-        import pandas as pd
+def play():
+    import numpy as np
+    import pandas as pd
+    
+    archivopreg = 'QyA.xlsx'
+    preguntas = pd.read_excel(archivopreg)
+    lives = 3
+    livestr = str(lives)
+    score = 0
+    used = []
+    ui.liveslabel.setText(livestr)
+    ui.reset_question()
+    tam = len(preguntas)
+    while lives > 0:
+        num = np.random.randint(0,tam)
         
-        archivopreg = 'QyA.xlsx'
-        preguntas = pd.read_excel(archivopreg)
-        lives = 3
-        livestr = str(lives)
-        score = 0
-        used = []
-        self.liveslabel.setText(livestr)
-        while lives > 0:
-            num = np.random.randint(0,5)
+        ui.reset_question()
+        if (num not in used):
+            preg= preguntas['Pregunta'][num]
+            ui.labelpregunta.setText(preg)
+            respa=preguntas['A'][num]
+            ui.RB1.setText(respa)
+            respb=preguntas['B'][num]
+            ui.RB2.setText(respb)
+            respc=preguntas['C'][num]
+            ui.RB3.setText(respc)
+            respd=preguntas['D'][num]
+            ui.RB4.setText(respd)
+            respcorrect= preguntas['Correcta'][num]
+            used.append(num)
+            print(used)
             answered = False
-            self.reset_question()
-            while (num not in used) and (answered != True):
-                preg= preguntas['Pregunta'][num]
-                self.labelpregunta.setText(preg)
-                respa=preguntas['A'][num]
-                self.RB1.setText(respa)
-                respb=preguntas['B'][num]
-                self.RB2.setText(respb)
-                respc=preguntas['C'][num]
-                self.RB3.setText(respc)
-                respd=preguntas['D'][num]
-                self.RB4.setText(respd)
-                respcorrect= preguntas['Correcta'][num]
-                used.append(num)
-                print(used)
-                
-                answer = self.submit_answer()
-                if answer == respcorrect.lower():
-                    score += 100
-                else:
-                    lives = lives - 1
-                    livestr = str(lives)
-                    self.liveslabel.setText(livestr)
-                print(score)
-                print("Lives: ",lives)
+            while answered == False:
+                if ui.BotonAceptar.clicked:
+                    answer = ui.submit_answer()
+                    print(answer)
+                    if answer == respcorrect.lower():
+                        score += 100
+                    else:
+                        lives = lives - 1
+                        livestr = str(lives)
+                        ui.liveslabel.setText(livestr)
+                    print(score)
+                    print("Lives: ",lives)
+                    answered = True
 
 
 if __name__ == "__main__":
@@ -362,5 +369,6 @@ if __name__ == "__main__":
     ui = Ui_MainWindow1()
     ui.setup(MainWindow)
     MainWindow.show()
-    ui.play()
+    ui.reset_question()
+    play()
     sys.exit(app.exec_())

@@ -22,6 +22,7 @@ class Ui_MainWindow(object):
         self.ui= Ui_MainWindow1()
         self.ui.setup(self.window)
         self.window.show()
+        self.ui.play()
         
 
     def setupUi(self, MainWindow):
