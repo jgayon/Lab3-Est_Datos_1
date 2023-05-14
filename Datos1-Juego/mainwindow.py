@@ -11,8 +11,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 #from gamewindow import *
 import numpy as np
-from rbgame import *
-import rbgame
+from rbgame2 import *
+import rbgame2
 
 
 class Ui_MainWindow(object):

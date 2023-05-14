@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'rbgame.ui'
+# Form implementation generated from reading ui file 'rbgame2.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.9
 #
@@ -14,18 +14,15 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow1(object):
     def setup(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1083, 850)
+        MainWindow.resize(1083, 948)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.BotonAceptar = QtWidgets.QPushButton(self.centralwidget)
-        self.BotonAceptar.setGeometry(QtCore.QRect(460, 760, 141, 41))
+        self.BotonAceptar.setGeometry(QtCore.QRect(460, 880, 141, 41))
         self.BotonAceptar.setObjectName("BotonAceptar")
-        self.backgroundbotones = QtWidgets.QLabel(self.centralwidget)
-        self.backgroundbotones.setGeometry(QtCore.QRect(0, 560, 1081, 261))
-        self.backgroundbotones.setText("")
-        self.backgroundbotones.setPixmap(QtGui.QPixmap("img/AnswersScreen.png"))
-        self.backgroundbotones.setScaledContents(True)
-        self.backgroundbotones.setObjectName("backgroundbotones")
+        self.BotonStart = QtWidgets.QPushButton(self.centralwidget)
+        self.BotonStart.setGeometry(QtCore.QRect(460, 680, 141, 41))
+        self.BotonStart.setObjectName("BotonStart")
         self.spacbackground = QtWidgets.QLabel(self.centralwidget)
         self.spacbackground.setGeometry(QtCore.QRect(0, 0, 1081, 471))
         self.spacbackground.setText("")
@@ -127,21 +124,21 @@ class Ui_MainWindow1(object):
         self.labelpregunta.setAlignment(QtCore.Qt.AlignCenter)
         self.labelpregunta.setObjectName("labelpregunta")
         self.RB1 = QtWidgets.QRadioButton(self.centralwidget)
-        self.RB1.setGeometry(QtCore.QRect(90, 610, 371, 71))
+        self.RB1.setGeometry(QtCore.QRect(10, 570, 1061, 71))
         palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(85, 255, 0, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.PlaceholderText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(85, 255, 0, 128))
@@ -159,21 +156,21 @@ class Ui_MainWindow1(object):
         self.RB1.setPalette(palette)
         self.RB1.setObjectName("RB1")
         self.RB2 = QtWidgets.QRadioButton(self.centralwidget)
-        self.RB2.setGeometry(QtCore.QRect(90, 680, 461, 81))
+        self.RB2.setGeometry(QtCore.QRect(10, 650, 1071, 81))
         palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(85, 255, 0, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.PlaceholderText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(85, 255, 0, 128))
@@ -191,21 +188,21 @@ class Ui_MainWindow1(object):
         self.RB2.setPalette(palette)
         self.RB2.setObjectName("RB2")
         self.RB3 = QtWidgets.QRadioButton(self.centralwidget)
-        self.RB3.setGeometry(QtCore.QRect(630, 610, 401, 61))
+        self.RB3.setGeometry(QtCore.QRect(10, 740, 1061, 61))
         palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(85, 255, 0, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.PlaceholderText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(85, 255, 0, 128))
@@ -223,21 +220,21 @@ class Ui_MainWindow1(object):
         self.RB3.setPalette(palette)
         self.RB3.setObjectName("RB3")
         self.RB4 = QtWidgets.QRadioButton(self.centralwidget)
-        self.RB4.setGeometry(QtCore.QRect(630, 680, 431, 81))
+        self.RB4.setGeometry(QtCore.QRect(10, 800, 1061, 81))
         palette = QtGui.QPalette()
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(85, 255, 0, 128))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Active, QtGui.QPalette.PlaceholderText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.WindowText, brush)
-        brush = QtGui.QBrush(QtGui.QColor(85, 255, 0))
+        brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.SolidPattern)
         palette.setBrush(QtGui.QPalette.Inactive, QtGui.QPalette.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(85, 255, 0, 128))
@@ -254,7 +251,6 @@ class Ui_MainWindow1(object):
         palette.setBrush(QtGui.QPalette.Disabled, QtGui.QPalette.PlaceholderText, brush)
         self.RB4.setPalette(palette)
         self.RB4.setObjectName("RB4")
-        self.backgroundbotones.raise_()
         self.spacbackground.raise_()
         self.ShipIcon.raise_()
         self.EnemyShip.raise_()
@@ -266,29 +262,44 @@ class Ui_MainWindow1(object):
         self.RB4.raise_()
         self.RB2.raise_()
         self.BotonAceptar.raise_()
+        self.BotonStart.raise_()
         self.RB1.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-        self.BotonAceptar.clicked.connect(self.submit_answer)
-        ui.reset_question()
 
-        
-
+        self.BotonAceptar.hide()
+        self.RB1.hide()
+        self.RB2.hide()
+        self.RB3.hide()
+        self.RB4.hide()
         self.retranslateUi(MainWindow)
+        ui.reset_question()
+        self.BotonAceptar.clicked.connect(self.submit_answer)
+        self.BotonStart.clicked.connect(self.start)
+
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.BotonAceptar.setText(_translate("MainWindow", "Aceptar"))
+        self.BotonStart.setText(_translate("MainWindow","Start"))
         self.liveslabel.setText(_translate("MainWindow", "X3"))
-        self.RB1.setText(_translate("MainWindow", "RadioButton"))
-        self.RB2.setText(_translate("MainWindow", "RadioButton"))
-        self.RB3.setText(_translate("MainWindow", "RadioButton"))
-        self.RB4.setText(_translate("MainWindow", "RadioButton"))
+        self.RB1.setText(_translate("MainWindow", "A"))
+        self.RB2.setText(_translate("MainWindow", "B"))
+        self.RB3.setText(_translate("MainWindow", "C"))
+        self.RB4.setText(_translate("MainWindow", "D"))
     
+    def start(self):
+        self.BotonAceptar.show()
+        self.RB1.show()
+        self.RB2.show()
+        self.RB3.show()
+        self.RB4.show()
+        self.BotonStart.hide()
+        self.play()
     def reset_question(self):
         self.RB1.setChecked(False)
         self.RB1.setEnabled(True)
@@ -317,52 +328,51 @@ class Ui_MainWindow1(object):
             print("d")
             return answer
 
-def play():
-    import numpy as np
-    import pandas as pd
-    
-    archivopreg = 'QyA.xlsx'
-    preguntas = pd.read_excel(archivopreg)
-    lives = 3
-    livestr = str(lives)
-    score = 0
-    used = []
-    ui.liveslabel.setText(livestr)
-    ui.reset_question()
-    tam = len(preguntas)
-    while lives > 0:
-        num = np.random.randint(0,tam)
+    def play(self):
+        import numpy as np
+        import pandas as pd
         
-        ui.reset_question()
-        if (num not in used):
-            preg= preguntas['Pregunta'][num]
-            ui.labelpregunta.setText(preg)
-            respa=preguntas['A'][num]
-            ui.RB1.setText(respa)
-            respb=preguntas['B'][num]
-            ui.RB2.setText(respb)
-            respc=preguntas['C'][num]
-            ui.RB3.setText(respc)
-            respd=preguntas['D'][num]
-            ui.RB4.setText(respd)
-            respcorrect= preguntas['Correcta'][num]
-            used.append(num)
-            print(used)
-            answered = False
-            while answered == False:
-                if ui.BotonAceptar.clicked:
-                    answer = ui.submit_answer()
-                    print(answer)
-                    if answer == respcorrect.lower():
-                        score += 100
-                    else:
-                        lives = lives - 1
-                        livestr = str(lives)
-                        ui.liveslabel.setText(livestr)
-                    print(score)
-                    print("Lives: ",lives)
-                    answered = True
-
+        archivopreg = 'QyA.xlsx'
+        preguntas = pd.read_excel(archivopreg)
+        lives = 3
+        livestr = str(lives)
+        score = 0
+        used = []
+        self.liveslabel.setText(livestr)
+        self.reset_question()
+        tam = len(preguntas)
+        while lives > 0:
+            num = np.random.randint(0,tam)
+            
+            self.reset_question()
+            if (num not in used):
+                preg= preguntas['Pregunta'][num]
+                self.labelpregunta.setText(preg)
+                respa=preguntas['A'][num]
+                self.RB1.setText(respa)
+                respb=preguntas['B'][num]
+                self.RB2.setText(respb)
+                respc=preguntas['C'][num]
+                self.RB3.setText(respc)
+                respd=preguntas['D'][num]
+                self.RB4.setText(respd)
+                respcorrect= preguntas['Correcta'][num]
+                used.append(num)
+                print(used)
+                answered = False
+                while answered == False:
+                    if self.BotonAceptar.clicked:
+                        answer = self.submit_answer()
+                        print(answer)
+                        if answer == respcorrect.lower():
+                            score += 100
+                        else:
+                            lives = lives - 1
+                            livestr = str(lives)
+                            self.liveslabel.setText(livestr)
+                        print(score)
+                        print("Lives: ",lives)
+                        answered = True
 
 if __name__ == "__main__":
     import sys
@@ -371,6 +381,4 @@ if __name__ == "__main__":
     ui = Ui_MainWindow1()
     ui.setup(MainWindow)
     MainWindow.show()
-    ui.reset_question()
-    play()
     sys.exit(app.exec_())
