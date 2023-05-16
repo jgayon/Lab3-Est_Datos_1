@@ -1,0 +1,5 @@
+Miguel,10
+Juan,100
+Felipe,110
+Andres,120
+luis,300

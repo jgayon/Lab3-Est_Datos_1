@@ -13,6 +13,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import numpy as np
 from rbgame2 import *
 import rbgame2
+from scoreboard import *
+from lista import *
+from lista import LinkedList
 
 
 class Ui_MainWindow(object):
@@ -22,7 +25,13 @@ class Ui_MainWindow(object):
         self.ui= Ui_MainWindow1()
         self.ui.setup(self.window)
         self.window.show()
-        
+    def highscore(self):
+        self.window = QtWidgets.QMainWindow()
+        score_list = LinkedList.load_scores("puntajes.txt")
+        if score_list is not None:
+            self.scoreboard_window = ScoreboardWindow(score_list)
+            self.scoreboard_window.setup(self.window)
+            self.scoreboard_window.show()
         
 
     def setupUi(self, MainWindow):
@@ -59,6 +68,7 @@ class Ui_MainWindow(object):
         self.botonopciones.setGeometry(QtCore.QRect(430, 650, 93, 28))
         self.botonopciones.setObjectName("botonopciones")
         MainWindow.setCentralWidget(self.centralwidget)
+        self.BotonPuntuacion.clicked.connect(self.highscore)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
