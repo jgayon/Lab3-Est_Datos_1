@@ -9,10 +9,16 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+import sys
+import numpy as np
+import pandas as pd
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.uic import loadUi
+from PyQt5.QtCore import QObject
 
-
-class Ui_MainWindow1(object):
+class Ui_MainWindow1(QObject):
     def setup(self, MainWindow):
+        
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1083, 948)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -275,9 +281,18 @@ class Ui_MainWindow1(object):
         self.RB3.hide()
         self.RB4.hide()
         self.retranslateUi(MainWindow)
-        ui.reset_question()
-        self.BotonAceptar.clicked.connect(self.submit_answer)
-        self.BotonStart.clicked.connect(self.start)
+        self.reset_question()
+
+        self.archivopreg = 'QyA.xlsx'
+        self.preguntas = pd.read_excel(self.archivopreg)
+        self.lives = 3
+        self.score = 0
+        self.used = []
+        self.last_clicked_button = None
+
+        self.BotonStart.clicked.connect(self.start_game)
+        #self.BotonAceptar.clicked.connect(self.check_answer)
+        self.BotonAceptar.clicked.connect(lambda: self.set_last_clicked_button(self.BotonAceptar))
 
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -292,87 +307,104 @@ class Ui_MainWindow1(object):
         self.RB3.setText(_translate("MainWindow", "C"))
         self.RB4.setText(_translate("MainWindow", "D"))
     
-    def start(self):
-        self.BotonAceptar.show()
+    def start_game(self):
+        self.reset_question()
+        self.update_lives_label()
+        self.score = 0
+        self.used = []
+        self.play_round()
+        self.BotonStart.hide()
         self.RB1.show()
         self.RB2.show()
         self.RB3.show()
         self.RB4.show()
-        self.BotonStart.hide()
-        self.play()
-    def reset_question(self):
-        self.RB1.setChecked(False)
-        self.RB1.setEnabled(True)
-        self.RB2.setChecked(False)
-        self.RB2.setEnabled(True)
-        self.RB3.setChecked(False)
-        self.RB3.setEnabled(True)
-        self.RB4.setChecked(False)
-        self.RB4.setEnabled(True)
-
-    def submit_answer(self):
-        if self.RB1.isChecked():
-            answer = "a"
-            print("a")
-            return answer
-        if self.RB2.isChecked():
-            answer = "b"
-            print("b")
-            return answer
-        if self.RB3.isChecked():
-            answer = "c"
-            print("c")
-            return answer
-        if self.RB4.isChecked():
-            answer = "d"
-            print("d")
-            return answer
-
-    def play(self):
-        import numpy as np
-        import pandas as pd
+        self.BotonAceptar.show()
         
-        archivopreg = 'QyA.xlsx'
-        preguntas = pd.read_excel(archivopreg)
-        lives = 3
-        livestr = str(lives)
-        score = 0
-        used = []
-        self.liveslabel.setText(livestr)
-        self.reset_question()
-        tam = len(preguntas)
-        while lives > 0:
-            num = np.random.randint(0,tam)
-            
+    def play_round(self):
+        if self.lives > 0:
+            tam = len(self.preguntas)
+            num = np.random.randint(0, tam)
+
             self.reset_question()
-            if (num not in used):
-                preg= preguntas['Pregunta'][num]
-                self.labelpregunta.setText(preg)
-                respa=preguntas['A'][num]
-                self.RB1.setText(respa)
-                respb=preguntas['B'][num]
-                self.RB2.setText(respb)
-                respc=preguntas['C'][num]
-                self.RB3.setText(respc)
-                respd=preguntas['D'][num]
-                self.RB4.setText(respd)
-                respcorrect= preguntas['Correcta'][num]
-                used.append(num)
-                print(used)
-                answered = False
-                while answered == False:
-                    if self.BotonAceptar.clicked:
-                        answer = self.submit_answer()
-                        print(answer)
-                        if answer == respcorrect.lower():
-                            score += 100
-                        else:
-                            lives = lives - 1
-                            livestr = str(lives)
-                            self.liveslabel.setText(livestr)
-                        print(score)
-                        print("Lives: ",lives)
-                        answered = True
+
+            if num not in self.used:
+                self.used.append(num)
+                print(self.used)
+
+                pregunta = self.preguntas['Pregunta'][num]
+                self.labelpregunta.setText(pregunta)
+                respuestas = [
+                    self.preguntas['A'][num],
+                    self.preguntas['B'][num],
+                    self.preguntas['C'][num],
+                    self.preguntas['D'][num]
+                ]
+                self.RB1.setText(respuestas[0])
+                self.RB2.setText(respuestas[1])
+                self.RB3.setText(respuestas[2])
+                self.RB4.setText(respuestas[3])
+
+                respcorrecta = self.preguntas['Correcta'][num]
+
+                self.BotonAceptar.setEnabled(True)  # Habilitar el botón para enviar la respuesta
+
+                self.RB1.clicked.connect(self.set_last_clicked_button)
+                self.RB2.clicked.connect(self.set_last_clicked_button)
+                self.RB3.clicked.connect(self.set_last_clicked_button)
+                self.RB4.clicked.connect(self.set_last_clicked_button)
+                self.BotonAceptar.clicked.connect(
+                lambda: self.check_answer(respcorrecta.lower())
+            )
+            else:
+                self.play_round()
+        else:
+            self.game_over()
+
+    def set_last_clicked_button(self, button):
+        self.last_clicked_button = button
+    
+    def check_answer(self, respcorrecta):
+        if self.last_clicked_button is not None:
+            answer = self.last_clicked_button.text().lower()
+            if self.RB1.isChecked():
+                answer = "a"
+            elif self.RB2.isChecked():
+                answer = "b"
+            elif self.RB3.isChecked():
+                answer = "c"
+            elif self.RB4.isChecked():
+                answer = "d"
+            
+            print("tu respuesta fue " + answer)
+            print("la respuesta correcta es "+ respcorrecta)
+
+            if answer == respcorrecta:
+                self.score += 100
+            else:
+                self.lives = self.lives - 1
+
+            self.update_lives_label()
+            print("Score:", self.score)
+            print("Lives:", self.lives)
+
+            self.BotonAceptar.setEnabled(False)  # Deshabilitar el botón después de enviar la respuesta
+            self.play_round()
+
+    def reset_question(self):
+        self.labelpregunta.clear()
+        self.RB1.setText('')
+        self.RB2.setText('')
+        self.RB3.setText('')
+        self.RB4.setText('')
+
+    def update_lives_label(self):
+        self.liveslabel.setText(str(self.lives))
+
+    def game_over(self):
+        print("Game Over")
+        print("Final Score:", self.score)
+        sys.exit()
+
 
 if __name__ == "__main__":
     import sys
